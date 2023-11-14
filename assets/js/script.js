@@ -45,5 +45,21 @@ function updateHourStyles() {
         container.append(timeblock); // Append time block to container
     }
 }
+  // Load events from local storage
+  function loadEvents() {
+    // Loop through time-blocks
+    $(".time-block").each(function () {
+        // Get the hour attribute
+        var hour = $(this).attr("data-hour");
+        // Retrieve event from localStorage
+        var event = localStorage.getItem("event_" + hour);
+        // Check if event exists
+        if (event) {
+            // If yes, set the event description
+            $(this).find(".description").val(event);
+        }
+    });
+}
 createTimeblocks();// Calling the createTimeblocks() function 
-updateHourStyles();// Call the updateTimeDisplay() function to update the time display when the script is loaded  
+updateHourStyles();// Call the updateTimeDisplay() function to update the time display when the script is loaded
+loadEvents();// Calling the loadEvents() function
