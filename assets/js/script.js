@@ -25,4 +25,25 @@ function updateHourStyles() {
         }
     });
   }
-  updateHourStyles();// Call the updateTimeDisplay() function to update the time display when the script is loaded  
+  // Create timeblocks for standard business hours
+  function createTimeblocks() {
+    var container = $(".container"); // Container for time blocks
+
+    for (var hour = 9; hour <= 17; hour++) { // Loop from 9 to 17 (9AM to 5PM)
+        var timeblock = $("<div>").addClass("time-block row"); // Create time block
+        timeblock.attr("data-hour", hour); // Set time block attribute for data-hour
+
+        var hourCol = $("<div>").addClass("hour col-2"); // Create hour column
+        hourCol.text(dayjs().hour(hour).format("hA")); // Display hour in AM/PM format
+
+        var textAreaCol = $("<textarea>").addClass("description col-8"); // Create text area column
+
+        var saveBtnCol = $("<button>").addClass("saveBtn col-2"); // Create save button column
+        saveBtnCol.append($("<i>").addClass("fas fa-save")); // Append save icon to button
+
+        timeblock.append(hourCol, textAreaCol, saveBtnCol); // Append all columns to time block
+        container.append(timeblock); // Append time block to container
+    }
+}
+createTimeblocks();// Calling the createTimeblocks() function 
+updateHourStyles();// Call the updateTimeDisplay() function to update the time display when the script is loaded  
